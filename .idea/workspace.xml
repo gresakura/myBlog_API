@@ -5,14 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e861171e-2b79-4eca-9223-86532aa5ea23" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/mysql.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/redis.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/env.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/middleware.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/modelConfig.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/redisModel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/user_role/user.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/authMiddleware.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/inresponseto.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/jwtUtils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/redisCleanup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/www" beforeDir="false" afterPath="$PROJECT_DIR$/bin/www" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/mysql.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/mysql.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/redis.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/redis.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/users.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +89,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
     &quot;npm.start.executor&quot;: &quot;Run&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;ts.external.directory.path&quot;: &quot;D:\\ruanjian\\Idea\\WebJS\\WebStorm 2023.1.2\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
@@ -88,7 +102,17 @@
     ]
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="npm.dev">
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -101,6 +125,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
       </list>
     </recent_temporary>
@@ -137,7 +162,9 @@
       <workItem from="1746272814404" duration="3830000" />
       <workItem from="1746362683612" duration="998000" />
       <workItem from="1746363912757" duration="1272000" />
-      <workItem from="1746368014089" duration="3070000" />
+      <workItem from="1746368014089" duration="12184000" />
+      <workItem from="1746385085516" duration="1243000" />
+      <workItem from="1746386342364" duration="41755000" />
     </task>
     <servers />
   </component>

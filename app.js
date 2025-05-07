@@ -1,33 +1,41 @@
-let createError = require('http-errors');
-let express = require('express');
-let path = require('path');
-let cookieParser = require('cookie-parser');
-let logger = require('morgan');
+let createError = require('http-errors')
+let express = require('express')
+let path = require('path')
+let cookieParser = require('cookie-parser')
+let logger = require('morgan')
 
-let indexRouter = require('./routes/index');
-let usersRouter = require('./routes/users');
+let indexRouter = require('./routes/index')
+let usersRouter = require('./routes/users')
 
-let app = express();
+const authMiddleware = require('./utils/authMiddleware')
 
-let mysql = require('./config/mysql');
-let redis = require('./config/redis');
+const config = require('./config')
+
+let app = express()
+
+require('./utils/redisCleanup'); // 引入 Redis 清理定时任务
+
+// 加载全局中间件
+// config.middleware(app);
+
+app.use(authMiddleware)
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'jade')
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(logger('dev'))
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(cookieParser())
+app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', indexRouter)
+app.use('/', usersRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  next(createError(404))
 });
 
 // error handler

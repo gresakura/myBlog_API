@@ -1,13 +1,16 @@
 const Redis = require("ioredis");
-require("dotenv").config();
+
+const { db } = require('./env')
+
+console.log(db.host, db.port, db.redis_password, db.DB)
 
 // 创建 Redis 客户端实例
 const redisClient = new Redis({
-    host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT,
-    password: process.env.REDIS_PASSWORD, // 如果无密码可省略
-    db: process.env.REDIS_DB, // 默认数据库索引
+    host: db.host,
+    port: db.port,
+
 });
+
 
 // 测试 Redis 连接
 redisClient.on("connect", () => {
@@ -15,7 +18,7 @@ redisClient.on("connect", () => {
 });
 
 redisClient.on("error", (err) => {
-    console.error("❌ Redis 连接失败:", err.message);
+    console.error("❌ Redis 连接失败:", err.message, err);
 });
 
 module.exports = redisClient;

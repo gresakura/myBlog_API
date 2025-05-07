@@ -1,31 +1,39 @@
 #!/usr/bin/env node
 
+const config = require('../config')
+
 /**
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('myblog-api:server');
-var http = require('http');
+let app = require('../app');
+let debug = require('debug')('myblog-api:server');
+let http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3002');
+let port = normalizePort(process.env.DEV_APP_PORT || '3002');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+let server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+// server.listen(port);
+
+server.listen(config.app.port, () => {
+  console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode`);
+  console.log(`Listening on port ${config.app.port}`);
+});
+
 server.on('error', onError);
 server.on('listening', onListening);
 
