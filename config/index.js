@@ -1,4 +1,4 @@
-// config/index.js
+// config/menu.js
 const envConfig = require('./env');
 const middleware = require('./middleware')
 const mysql = require('./mysql')

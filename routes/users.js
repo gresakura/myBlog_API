@@ -1,11 +1,30 @@
 let express = require('express')
 let router = express.Router()
 let bcrypt = require('bcryptjs') // 用于密码加密
-const redisClient = require('../config/redis');
-let { generateToken } = require('../utils/jwtUtils'); // 引入JWT生成函数
+let redisClient = require('../config/redis');
+// 在文件顶部添加以下依赖
+const multer = require('multer');
+const upload = multer({ storage: multer.memoryStorage() }); // 内存存储避免本地保存文件
+
+// 在文件顶部添加以下依赖
+let OSS = require('ali-oss')
+let path = require('path')
+let crypto = require('crypto')
+let dayjs = require('dayjs')
+
+
+let { generateToken } = require('../utils/jwtUtils') // 引入JWT生成函数
 let { Users } = require('../models/user_role/user')
 let { sendSuccessResponse, sendErrorResponse } = require('../utils/inresponseto')
-let { Op } = require('sequelize');
+let { Op } = require('sequelize')
+
+// 初始化OSS客户端（建议将配置放在环境变量中）
+const ossClient = new OSS({
+  region: process.env.ALI_OSS_REGION,
+  accessKeyId: process.env.ALI_OSS_ACCESS_KEY_ID,
+  accessKeySecret: process.env.ALI_OSS_ACCESS_KEY_SECRET,
+  bucket: process.env.ALI_OSS_BUCKET
+})
 
 
 /**
@@ -299,6 +318,42 @@ router.delete(`/delete-userInfo`, async function(req, res, next) {
   } catch (error) {
     sendErrorResponse(res, 500, '删除用户信息时发生错误')
     next(error)
+  }
+})
+
+/**
+ * @description 上传图片
+ */
+router.post('/upload-image', upload.single('file'), async function(req, res, next) {
+  try {
+    // 检查是否有文件上传
+    if (!req.file) {
+      return sendErrorResponse(res, 400, '请选择要上传的文件')
+    }
+
+    // 生成唯一文件名
+    const timestamp = dayjs().format('YYYYMMDDHHmmss')
+    const randomString = crypto.randomBytes(3).toString('hex')
+    const extname = path.extname(req.file.originalname)
+    const filename = `upDataProfilePicture/${timestamp}_${randomString}${extname}`
+
+    // 上传到OSS
+    const result = await ossClient.put(filename, req.file.buffer, {
+      headers: {
+        'Content-Type': req.file.mimetype
+      }
+    })
+
+    // 返回成功响应和文件的URL或其他信息
+    // 返回文件URL
+    sendSuccessResponse(res, 200, {
+      url: result.url,
+      filename: filename
+    }, '文件上传成功');
+
+  } catch (error) {
+    sendErrorResponse(res, 500, '上传图片时发生错误');
+    next(error);
   }
 })
 

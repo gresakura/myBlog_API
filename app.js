@@ -4,7 +4,7 @@ let path = require('path')
 let cookieParser = require('cookie-parser')
 let logger = require('morgan')
 
-let indexRouter = require('./routes/index')
+let menusRouter = require('./routes/menu')
 let usersRouter = require('./routes/users')
 
 const authMiddleware = require('./utils/authMiddleware')
@@ -30,8 +30,8 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/', indexRouter)
-app.use('/', usersRouter)
+app.use('/api', menusRouter)
+app.use('/api', usersRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
